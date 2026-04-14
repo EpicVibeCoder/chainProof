@@ -42,11 +42,14 @@ Thumbs.db
 .expo-shared/
 *.jks
 *.keystore
-android/.gradle/
-android/app/build/
-android/build/
-ios/build/
-ios/Pods/
+mobile/.expo/
+mobile/.expo-shared/
+mobile/.metro-cache/
+mobile/android/.gradle/
+mobile/android/app/build/
+mobile/android/build/
+mobile/ios/build/
+mobile/ios/Pods/
 
 # Solidity / Hardhat / Foundry artifacts
 artifacts/
@@ -54,6 +57,11 @@ cache/
 typechain-types/
 broadcast/
 out/
+contract/artifacts/
+contract/cache/
+contract/typechain-types/
+contract/broadcast/
+contract/out/
 
 # test and temp files
 tmp/
