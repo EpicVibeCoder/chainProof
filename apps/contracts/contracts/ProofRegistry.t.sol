@@ -57,7 +57,6 @@ contract ProofRegistryTest {
         } catch {
             reverted = true;
         }
-
         require(reverted, "expected duplicate proof revert");
     }
 
