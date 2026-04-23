@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 
+import {Test} from "forge-std/Test.sol";
 import {ProofRegistry} from "./ProofRegistry.sol";
 
 contract ProofRegistryActor {
+    
     function register(
         ProofRegistry registry,
         bytes32 fileHash,
@@ -13,9 +15,18 @@ contract ProofRegistryActor {
     }
 }
 
-contract ProofRegistryTest {
+contract ProofRegistryTest is Test {
+
     ProofRegistry private registry;
     ProofRegistryActor private actor;
+
+    event ProofRegistered(
+        bytes32 indexed hash,
+        address indexed owner,
+        uint64 timestamp,
+        uint64 blockNumber,
+        string ipfsCid
+    );
 
     function setUp() public {
         registry = new ProofRegistry();
@@ -82,5 +93,21 @@ contract ProofRegistryTest {
             "stored cid mismatch"
         );
         require(exists, "stored exists should be true");
+    }
+
+    function test_RegisterProof_EmitsProofRegisteredEvent() public {
+        bytes32 fileHash = keccak256("proof-file-event");
+        string memory ipfsCid = "bafy-proof-event";
+
+        vm.expectEmit(address(registry));
+        emit ProofRegistered(
+            fileHash,
+            address(this),
+            uint64(block.timestamp),
+            uint64(block.number),
+            ipfsCid
+        );
+
+        registry.registerProof(fileHash, ipfsCid);
     }
 }
