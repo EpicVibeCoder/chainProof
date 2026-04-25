@@ -9,6 +9,8 @@
 
 # Hardhat Build Artifacts
 /artifacts
+#ignition deployment output
+/ignition/deployments
 
 # Hardhat compilation (v2) support directory
 /cache
